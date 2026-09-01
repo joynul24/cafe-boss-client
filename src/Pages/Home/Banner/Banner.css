@@ -1,0 +1,5 @@
+.carousel .thumbs-wrapper {
+  display: flex !important;
+  justify-content: center !important;
+  margin: 10px 0 !important;
+}
