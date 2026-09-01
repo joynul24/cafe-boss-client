@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom"
-import Navber from "../components/shared/Navber/Navber"
 import Footer from "../components/shared/Footer/Footer"
+import Navber from "../components/shared/Navber/Navber"
 
-function Main() {
+function MainLayout() {
   return (
     <div className="container mx-auto">
         <Navber></Navber>
@@ -12,4 +12,4 @@ function Main() {
   )
 }
 
-export default Main
+export default MainLayout
