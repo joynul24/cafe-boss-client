@@ -1,4 +1,5 @@
 import Banner from "./Banner/Banner"
+import BistroBoss from "./BistroBoss/BistroBoss"
 import DisplayFoodSlider from "./DisplayFoodSlider/DisplayFoodSlider"
 
 function Home() {
@@ -6,6 +7,7 @@ function Home() {
     <div>
         <Banner></Banner>,
         <DisplayFoodSlider></DisplayFoodSlider>
+        <BistroBoss></BistroBoss>
     </div>
   )
 }
