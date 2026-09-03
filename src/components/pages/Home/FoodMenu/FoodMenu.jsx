@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import SectionTitle from "../../../shared/SectionTitle/SectionTitle";
 import MenuFoodCard from "../../../shared/MenuFoodCard/MenuFoodCard";
+import { toast } from "react-toastify";
 
 function FoodMenu() {
     const [menu, setMenu] = useState([]);
@@ -11,7 +12,9 @@ function FoodMenu() {
     useEffect(() => {
         axiosPublic.get("/menu")
             .then(res => setMenu(res.data))
-            .catch(err => console.log(err))
+            .catch(err => {
+                toast.error(err?.response?.data?.message || "Failed to load menu data!");
+            })
     }, [axiosPublic])
 
     // Slice the array to show 6 items by default, or all items when showAll is true
@@ -31,7 +34,7 @@ function FoodMenu() {
             {
                 !showAll && menu.length > 6 && (
                     <div className="flex justify-center my-10">
-                        <button onClick={()=> setShowAll(true)} className="btn btn-outline">VIEW FULL MENU</button>
+                        <button onClick={()=> setShowAll(true)} className="btn btn-outline border-0 border-b-4 border-slate-900 bg-transparent text-slate-900 hover:bg-slate-900 hover:text-white hover:border-slate-900 uppercase mt-4 transition-all duration-300">VIEW FULL MENU</button>
                     </div>
                 )
             }

@@ -16,7 +16,7 @@ export default function ChefRecommends() {
     const dessertsItem = menu.filter(item => item.category === "dessert")[0]
   
     const recommendedItems = [saladItem, popularItem, dessertsItem].filter(Boolean);
-    console.log(recommendedItems)
+
   return (
     <div className="my-20">
       <SectionTitle title="CHEF RECOMMENDS" subTitle="---Should Try---"></SectionTitle>

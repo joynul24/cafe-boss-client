@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxiosPublic from "./useAxiosPublic"
+import { toast } from "react-toastify";
 
 function useMenuData() {
     const axiosPublic = useAxiosPublic();
@@ -13,7 +14,7 @@ function useMenuData() {
                 setLoading(false)
             })
             .catch(err => {
-                console.log(err)
+                toast.error(err?.response?.data?.message || "Failed to load menu data!");
                 setLoading(false)
             })
     }, [axiosPublic]);
