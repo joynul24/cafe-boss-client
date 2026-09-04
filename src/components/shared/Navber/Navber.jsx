@@ -6,6 +6,7 @@ function Navber() {
   const NavItems = <>
     <li><NavLink to={"/"}>Home</NavLink></li>
     <li><NavLink to={"/menu"}>Menu</NavLink></li>
+    <li><NavLink to={"/shop"}>Shop</NavLink></li>
   </>
 
   return (

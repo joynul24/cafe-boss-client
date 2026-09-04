@@ -6,6 +6,7 @@ import SaladMenu from "./SaladMenu/SaladMenu"
 import useMenuData from "../../../hooks/useMenuData"
 import PizzaMenu from "./PizzaMenu/PizzaMenu"
 import SoupsMenu from "./SoupsMenu/SoupsMenu"
+import { Helmet } from "react-helmet-async"
 
 function Menu() {
   const [menu, loading] = useMenuData();
@@ -23,15 +24,18 @@ function Menu() {
   const pizzaMenu = menu.filter(item => item.category === "pizza").slice(0, 6)
   const saladMenu = menu.filter(item => item.category === "salad").slice(0, 6);
   const soupMenu = menu.filter(item => item.category === "soup").slice(0, 6);
-// console.log(soupMenu)
+  // console.log(soupMenu)
   return (
     <div>
-        <SectionCover img={banner1} title="our menu" subTitle="Would you like to try a dish?"></SectionCover>
-        <OfferdMenu items ={offeredMenu}></OfferdMenu>
-        <DessertsMenu items={dessertsMenu}></DessertsMenu>
-        <PizzaMenu items={pizzaMenu}></PizzaMenu>
-        <SaladMenu items={saladMenu}></SaladMenu>
-        <SoupsMenu items={soupMenu}></SoupsMenu>
+      <Helmet>
+        <title>Cafe Boss | Menu</title>
+      </Helmet>
+      <SectionCover img={banner1} title="our menu" subTitle="Would you like to try a dish?"></SectionCover>
+      <OfferdMenu items={offeredMenu}></OfferdMenu>
+      <DessertsMenu items={dessertsMenu}></DessertsMenu>
+      <PizzaMenu items={pizzaMenu}></PizzaMenu>
+      <SaladMenu items={saladMenu}></SaladMenu>
+      <SoupsMenu items={soupMenu}></SoupsMenu>
     </div>
   )
 }
