@@ -7,6 +7,7 @@ function useMenuData() {
     const [menu, setMenu] = useState([]);
     const [loading, setLoading] = useState(true)
 
+    
     useEffect(() => {
         axiosPublic.get("/menu")
             .then(res => {
@@ -18,6 +19,7 @@ function useMenuData() {
                 setLoading(false)
             })
     }, [axiosPublic]);
+    
     return [menu, loading];
 }
 

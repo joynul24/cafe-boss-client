@@ -1,16 +1,7 @@
-import useMenuData from "../../../../hooks/useMenuData"
 import MenuFoodCard from "../../../shared/MenuFoodCard/MenuFoodCard";
 import SectionTitle from "../../../shared/SectionTitle/SectionTitle"
 
-function OfferdMenu() {
-  const [menu, loading] = useMenuData();
-  const offeredMenu = menu.filter(item => item.category === "offered");
-
-  if (loading) {
-    return <div className="flex justify-center">
-      <span className="loading loading-bars loading-lg"></span>
-    </div>;
-  }
+function OfferdMenu({items}) {
 
   return (
     <div className="my-20">
@@ -18,7 +9,7 @@ function OfferdMenu() {
       {/* Display Offred Menu data */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {
-          offeredMenu.map(data => <MenuFoodCard key={data._id} item={data}></MenuFoodCard>)
+          items.map(data => <MenuFoodCard key={data._id} item={data}></MenuFoodCard>)
         }
       </div>
       <div className="flex justify-center my-10">

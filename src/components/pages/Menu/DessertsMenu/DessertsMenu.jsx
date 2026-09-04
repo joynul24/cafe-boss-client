@@ -1,19 +1,9 @@
 import SectionCover from "../../../shared/SectionCover/SectionCover"
-import imgDessert from "../../../../assets/menu/dessert-bg.jpeg"
-import useMenuData from "../../../../hooks/useMenuData"
+import imgDessert from "../../../../assets/menu/dessert-bg.jpeg";
 import MenuFoodCard from "../../../shared/MenuFoodCard/MenuFoodCard";
 
-function DessertsMenu() {
-    const [menu, loading] = useMenuData();
-    const dessertMenu = menu.filter(item=> item.category === "dessert");
-    
-    const limitDessertsMenu = dessertMenu.slice(0, 6)
+function DessertsMenu({items}) {
 
-      if (loading) {
-    return <div className="flex justify-center">
-         <span className="loading loading-bars loading-lg"></span>
-       </div>;
-  }
 
   return (
     <div>
@@ -21,7 +11,7 @@ function DessertsMenu() {
         {/* Display Desserts Menu */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
          {
-            limitDessertsMenu.map(data => <MenuFoodCard key={data._id} item={data}></MenuFoodCard>)
+            items.map(data => <MenuFoodCard key={data._id} item={data}></MenuFoodCard>)
          }
         </div>
         {/* Button */}
