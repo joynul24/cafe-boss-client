@@ -4,6 +4,7 @@ import {
 import MainLayout from "../Layout/MainLayout";
 import Home from "../components/pages/Home/Home";
 import Menu from "../components/pages/Menu/Menu";
+import OrderShop from "../components/pages/Shop/OrderShop/OrderShop";
 import Shop from "../components/pages/Shop/Shop";
 
 export const Router = createBrowserRouter([
@@ -22,6 +23,10 @@ export const Router = createBrowserRouter([
             {
                 path: "/shop",
                 element: <Shop></Shop>
+            },
+            {
+                path: "shop/:category",
+                element: <OrderShop></OrderShop>
             }
         ]
     },

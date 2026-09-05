@@ -1,6 +1,7 @@
 import SectionCover from "../../../shared/SectionCover/SectionCover"
 import imgSalad from "../../../../assets/menu/salad-bg.jpg"
 import MenuFoodCard from "../../../shared/MenuFoodCard/MenuFoodCard"
+import { Link } from "react-router-dom"
 
 function SaladMenu({items}) {
 
@@ -16,7 +17,7 @@ function SaladMenu({items}) {
             </div>
             {/* Button */}
             <div className="flex justify-center my-10">
-                <button className="btn btn-outline border-0 border-b-4 border-slate-900 bg-transparent text-slate-900 hover:bg-slate-900 hover:text-white hover:border-slate-900 uppercase mt-4 transition-all duration-300">ORDER YOUR FAVOURITE FOOD</button>
+                <Link to={"/shop/salad"} className="btn btn-outline border-0 border-b-4 border-slate-900 bg-transparent text-slate-900 hover:bg-slate-900 hover:text-white hover:border-slate-900 uppercase mt-4 transition-all duration-300">ORDER YOUR FAVOURITE FOOD</Link>
             </div>
         </div>
     )
