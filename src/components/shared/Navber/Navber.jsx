@@ -8,6 +8,7 @@ function Navber() {
     <li><NavLink to={"/contact"}>Contact</NavLink></li>
     <li><NavLink to={"/menu"}>Menu</NavLink></li>
     <li><NavLink to={"/shop"}>Shop</NavLink></li>
+    <li><NavLink to={"auth/login"}>Login</NavLink></li>
   </>
 
   return (

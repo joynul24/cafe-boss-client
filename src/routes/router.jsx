@@ -7,6 +7,9 @@ import Menu from "../components/pages/Menu/Menu";
 import OrderShop from "../components/pages/Shop/OrderShop/OrderShop";
 import Shop from "../components/pages/Shop/Shop";
 import ContactUs from "../components/pages/ContactUs/ContactUs";
+import AuthLayout from "../Layout/AuthLayout";
+import Login from "../auth/Login/Login";
+import Register from "../auth/Register/Register";
 
 export const Router = createBrowserRouter([
     {
@@ -35,4 +38,18 @@ export const Router = createBrowserRouter([
             }
         ]
     },
+    {
+        path: "/auth",
+        element: <AuthLayout></AuthLayout>,
+        children: [
+            {
+                path: "login",
+                element: <Login></Login>
+            },
+            {
+                path: "register",
+                element: <Register></Register>
+            }
+        ]
+    }
 ]);
