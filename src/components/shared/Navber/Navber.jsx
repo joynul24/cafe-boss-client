@@ -1,15 +1,59 @@
 import { NavLink } from "react-router-dom"
 import "./Navber.css"
+import useAuth from "../../../hooks/useAuth"
+import { toast } from "react-toastify";
 
 function Navber() {
+  const {user, logOut} = useAuth();
 
-  const NavItems = <>
-    <li><NavLink to={"/"}>Home</NavLink></li>
-    <li><NavLink to={"/contact"}>Contact</NavLink></li>
-    <li><NavLink to={"/menu"}>Menu</NavLink></li>
-    <li><NavLink to={"/shop"}>Shop</NavLink></li>
-    <li><NavLink to={"auth/login"}>Login</NavLink></li>
+  // Sign out
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Logged out successfully!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((error) => {
+        toast.error(error.message)
+      });
+  };
+
+ const NavItems = (
+  <>
+    <li><NavLink to={"/"}>HOME</NavLink></li>
+    <li><NavLink to={"/contact"}>CONTACT</NavLink></li>
+    <li><NavLink to={"/menu"}>MENU</NavLink></li>
+    <li><NavLink to={"/shop"}>SHOP</NavLink></li>
+
+    {user ? (
+      <>
+        <li>
+          <button onClick={handleLogOut} className="btn btn-ghost btn-sm">
+            SIGN OUT
+          </button>
+        </li>
+        {user?.photoURL && (
+          <li className="flex justify-center items-center">
+            <img
+              src={user?.photoURL}
+              alt="Profile"
+              title={user?.displayName || "User"}
+              referrerPolicy="no-referrer"
+              className="w-10 h-10 rounded-full object-cover border border-amber-500"
+            />
+          </li>
+        )}
+      </>
+    ) : (
+      <li><NavLink to={"/auth/login"}>LOGIN</NavLink></li>
+    )}
   </>
+);
 
   return (
     <div className="container mx-auto fixed top-0 left-0 right-0 z-50 bg-black/20 text-white navbar">

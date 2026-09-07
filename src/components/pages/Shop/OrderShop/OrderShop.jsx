@@ -48,13 +48,15 @@ function OrderShop() {
        <SectionCover img={imgShop} title="order food" subTitle="Would you like to try a dish?"></SectionCover>
       <Tabs selectedIndex={tabIndex} onSelect={handleSelect}>
         {/* Tab Headers */}
-        <TabList className="flex justify-center items-center gap-6 border-none mt-10 mb-10 text-lg font-bold uppercase cursor-pointer">
+        <div className="w-full overflow-x-auto my-8 no-scrollbar">
+          <TabList className="flex justify-center items-center gap-6 border-none mt-10 mb-10 text-lg font-bold uppercase cursor-pointer">
           <Tab selectedClassName="border-b-4 border-amber-500 text-amber-500 outline-none pb-1">Salad</Tab>
           <Tab selectedClassName="border-b-4 border-amber-500 text-amber-500 outline-none pb-1">Pizza</Tab>
           <Tab selectedClassName="border-b-4 border-amber-500 text-amber-500 outline-none pb-1">Soups</Tab>
           <Tab selectedClassName="border-b-4 border-amber-500 text-amber-500 outline-none pb-1">Desserts</Tab>
           <Tab selectedClassName="border-b-4 border-amber-500 text-amber-500 outline-none pb-1">Drinks</Tab>
         </TabList>
+        </div>
 
         {/* Tab Panels */}
         <TabPanel>
