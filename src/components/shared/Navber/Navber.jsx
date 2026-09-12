@@ -4,6 +4,7 @@ import useAuth from "../../../hooks/useAuth"
 import { toast } from "react-toastify";
 import { FaShoppingCart } from "react-icons/fa";
 import useCartsData from "../../../hooks/useCartsData";
+import Swal from "sweetalert2";
 
 function Navber() {
   const { user, logOut } = useAuth();
