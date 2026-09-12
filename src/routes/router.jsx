@@ -10,6 +10,8 @@ import ContactUs from "../components/pages/ContactUs/ContactUs";
 import AuthLayout from "../Layout/AuthLayout";
 import Login from "../auth/Login/Login";
 import Register from "../auth/Register/Register";
+import Secret from "../components/pages/Secret/Secret";
+import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 
 export const Router = createBrowserRouter([
     {
@@ -35,6 +37,10 @@ export const Router = createBrowserRouter([
             {
                 path: "shop/:category",
                 element: <OrderShop></OrderShop>
+            },
+            {
+                path: 'secret',
+                element: <PrivateRoute><Secret></Secret></PrivateRoute>
             }
         ]
     },
