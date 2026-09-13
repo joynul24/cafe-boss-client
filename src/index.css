@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.font-cinzel {
+    font-family: "Cinzel", serif;
+}
+
+.font-inter {
+    font-family: "Inter", sans-serif;
+}
+
+/* মূল ওয়েবসাইটের নেভবারের জন্য অ্যাক্টিভ কালার */
+/* nav a.active,
+.navbar a.active {
+  color: #D1A054 !important;
+  background-color: transparent;
+} */
+/* ড্যাশবোর্ডের অ্যাক্টিভ আইটেমের জন্য সাদা কালার */
+.menu a.active {
+  color: #ffffff !important;
+  background-color: #b58742; 
+}

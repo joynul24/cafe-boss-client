@@ -1,0 +1,10 @@
+/* .active{
+    background-color: transparent !important;
+     color: #EEFF25 !important;
+} */
+
+nav a.active,
+.navbar a.active {
+  color: yellow !important;
+  background-color: transparent !important;
+}
