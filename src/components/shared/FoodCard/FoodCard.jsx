@@ -38,8 +38,11 @@ function FoodCard({ item }) {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, login"
-      }).then(() => {
-         navigate("/auth/login", {state: {from: location}})
+      }).then((result) => {
+        // Only navigate if the user clicks "Yes, login"
+      if (result.isConfirmed) {
+        navigate("/auth/login", { state: { from: location } });
+      }
       });
     }
   }

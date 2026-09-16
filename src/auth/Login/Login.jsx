@@ -6,6 +6,7 @@ import loginImg from "../../assets/others/authentication2.png";
 import "./Login.css";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 function Login() {
   const [captchaText, setCaptchaText] = useState("");
@@ -15,6 +16,7 @@ function Login() {
   const { signIn, googleSignIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosPublic = useAxiosPublic();
 
   const from = location.state?.from?.pathname || "/";
 
@@ -48,49 +50,72 @@ function Login() {
     }
   };
 
-  // Login method
-  const onSubmit = (data) => {
-    signIn(data.email, data.password)
-      .then(() => {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "User Logged In Successfully!",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        navigate(from, { replace: true });
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Login Failed",
-          text: error.message,
-        });
-      });
-  };
 
-  // Google sign in
-  const handleGoogleSignIn = () => {
-    googleSignIn()
-      .then(() => {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Logged in with Google successfully!",
-          showConfirmButton: false,
-          timer: 1500,
+  const onSubmit = (data) => {
+  signIn(data.email, data.password)
+    .then((result) => {
+      const loggedUser = result.user;
+
+      const userInfo = {
+        name: loggedUser.displayName || data.name || "User",
+        email: loggedUser.email,
+        role: "user",
+      };
+
+      axiosPublic.post("/users", userInfo)
+        .then(() => {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "User Logged In Successfully!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate(from, { replace: true });
         });
-        navigate(from, { replace: true });
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Google Sign In Failed",
-          text: error.message,
-        });
+    })
+    .catch((error) => {
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: error.message,
       });
-  };
+    });
+};
+
+
+  
+  const handleGoogleSignIn = () => {
+  googleSignIn()
+    .then((result) => {
+      const loggedUser = result.user;
+      
+      const userInfo = {
+        name: loggedUser.displayName,
+        email: loggedUser.email,
+        role: "user",
+      };
+      axiosPublic.post("/users", userInfo)
+        .then(() => {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Logged in with Google successfully!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate(from, { replace: true });
+        });
+    })
+    .catch((error) => {
+      Swal.fire({
+        icon: "error",
+        title: "Google Sign In Failed",
+        text: error.message,
+      });
+    });
+};
+
 
   return (
     <div className="bannerBG min-h-screen flex items-center justify-center bg-[#f3f3f3] p-4 sm:p-8">

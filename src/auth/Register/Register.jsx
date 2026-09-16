@@ -6,6 +6,7 @@ import "../Login/Login.css"
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 function Register() {
   const {
@@ -17,64 +18,97 @@ function Register() {
 
   const { createUser, updateUserProfile, googleSignIn } = useAuth();
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const axiosPublic = useAxiosPublic();
+
 
   const onSubmit = (data) => {
-    createUser(data.email, data.password)
-      .then((result) => {
-        const loggedUser = result.user;
-        console.log("Logged User:", loggedUser);
+  createUser(data.email, data.password)
+    .then(() => {
+      updateUserProfile(data.name, data.photo)
+        .then(() => {
+          // User payload
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+            photoURL: data.photo,
+            role: 'user',
+          };
 
-        updateUserProfile(data.name, data.photo)
-          .then(() => {
-            reset();
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "User created successfully!",
-              showConfirmButton: false,
-              timer: 1500,
+          // Save user to DB
+          axiosPublic.post('/users', userInfo)
+            .then((res) => {
+              if (res.data.insertedId || res.data.message === 'User already exists') {
+                reset();
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "User created successfully!",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate("/");
+              }
+            })
+            .catch((error) => {
+              console.error("Failed to save user to DB:", error);
             });
-            navigate("/");
-          })
-          .catch((error) => {
-            Swal.fire({
-              icon: "error",
-              title: "Profile Update Failed",
-              text: error.message,
-            });
+        })
+        .catch((error) => {
+          Swal.fire({
+            icon: "error",
+            title: "Profile Update Failed",
+            text: error.message,
           });
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Registration Failed",
-          text: error.message,
         });
+    })
+    .catch((error) => {
+      Swal.fire({
+        icon: "error",
+        title: "Registration Failed",
+        text: error.message,
       });
-  };
+    });
+};
 
 
-  const handleGoogleSignIn = () => {
-    googleSignIn()
-      .then(() => {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Logged in with Google successfully!",
-          showConfirmButton: false,
-          timer: 1500,
+const handleGoogleSignIn = () => {
+  googleSignIn()
+    .then((result) => {
+      const loggedUser = result.user;
+
+      // Google user payload
+      const userInfo = {
+        name: loggedUser.displayName,
+        email: loggedUser.email,
+        photoURL: loggedUser.photoURL,
+        role: 'user',
+      };
+
+      // Save Google user to DB
+      axiosPublic.post('/users', userInfo)
+        .then(() => {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Logged in with Google successfully!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/");
+        })
+        .catch((error) => {
+          console.error("Failed to save Google user to DB:", error);
         });
-        navigate("/");
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Google Sign In Failed",
-          text: error.message,
-        });
+    })
+    .catch((error) => {
+      Swal.fire({
+        icon: "error",
+        title: "Google Sign In Failed",
+        text: error.message,
       });
-  };
+    });
+};
 
 
   return (

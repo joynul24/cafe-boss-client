@@ -1,5 +1,6 @@
 import {
     createBrowserRouter,
+    Navigate,
 } from "react-router-dom";
 import MainLayout from "../Layout/MainLayout";
 import Home from "../components/pages/Home/Home";
@@ -17,6 +18,29 @@ import Mycart from "../components/dashbaord/User/Mycart";
 import UserHome from "../components/dashbaord/User/UserHome";
 import AdminDashboard from "../components/dashbaord/Admin/AdminDashboard";
 import MyBooking from "../components/dashbaord/User/MyBooking";
+import ManageItem from "../components/dashbaord/Admin/ManageItem";
+import AllUser from "../components/dashbaord/Admin/AllUser";
+import AddItem from "../components/dashbaord/Admin/AddItem";
+import ManageBookings from "../components/dashbaord/Admin/ManageBookings";
+import Reservation from "../components/dashbaord/User/Reservation";
+import PaymentHistory from "../components/dashbaord/User/PaymentHistory";
+import AddReview from "../components/dashbaord/User/AddReview";
+import useAdmin from "../hooks/useAdmin";
+
+const DashboardRedirect = () => {
+    const [isAdmin, isAdminLoading] = useAdmin();
+    // const isAdmin = false
+
+    if(isAdminLoading){
+    return <span className="loading loading-bars loading-xl"></span>
+  }
+
+    if (isAdmin) {
+        return <Navigate to="/dashboard/adminHome" replace />;
+    }
+
+    return <Navigate to="/dashboard/userHome" replace />;
+};
 
 export const Router = createBrowserRouter([
     {
@@ -54,23 +78,53 @@ export const Router = createBrowserRouter([
       element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       children: [
         {
-            path: "/dashboard"
-        },
-        {
-            path: "/dashboard/myCart",
-            element: <PrivateRoute><Mycart></Mycart></PrivateRoute>
+            index: true,
+            element: <DashboardRedirect></DashboardRedirect>
         },
         {
             path:"/dashboard/userHome",
             element:<PrivateRoute><UserHome></UserHome></PrivateRoute>
         },
         {
+            path:"/dashboard/reservation",
+            element:<PrivateRoute><Reservation></Reservation></PrivateRoute>
+        },
+        {
+            path:"/dashboard/paymentHistory",
+            element:<PrivateRoute><PaymentHistory></PaymentHistory></PrivateRoute>
+        },
+        {
+            path: "/dashboard/myCart",
+            element: <PrivateRoute><Mycart></Mycart></PrivateRoute>
+        },
+        {
+            path: "/dashboard/addReview",
+            element: <PrivateRoute><AddReview></AddReview></PrivateRoute>
+        },
+        {
             path: "/dashboard/myBooking",
             element: <PrivateRoute><MyBooking></MyBooking></PrivateRoute>
         },
-        {
-            path: "/dashboard/addminDashboard",
+        // Admin Reletd Routes
+                {
+            path: "/dashboard/adminHome",
             element:<PrivateRoute><AdminDashboard></AdminDashboard></PrivateRoute>
+        },
+        {
+            path: "/dashboard/manageItems",
+            element: <PrivateRoute><ManageItem></ManageItem></PrivateRoute>
+        },
+        {
+            path:"/dashboard/addItem",
+            element:<PrivateRoute><AddItem></AddItem></PrivateRoute>
+        },
+        {
+            path:"/dashboard/manageBooking",
+            element:<PrivateRoute><ManageBookings></ManageBookings></PrivateRoute>
+        },
+        {
+            path:"/dashboard/allUsers",
+            element:<PrivateRoute><AllUser></AllUser></PrivateRoute>
         }
       ]
     },

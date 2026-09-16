@@ -9,20 +9,26 @@ import {
   FaSearch, 
   FaBars,
   FaTimes,
+  FaListUl,
+  FaBook,
+  FaWallet,
 } from "react-icons/fa";
 import useCartsData from "../hooks/useCartsData";
-import useAuth from "../hooks/useAuth";
 import { useState } from "react";
+import { SlCalender } from "react-icons/sl";
+import { MdPreview } from "react-icons/md";
+import useAdmin from "../hooks/useAdmin";
 
 function Dashboard() {
-  const {user} = useAuth();
   const [cart] = useCartsData();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isAdmin, isAdminLoading] = useAdmin()
+  // const isAdmin = false;
 
-  // Toggle this boolean to switch between Admin and User dashboard views
-  const isAdmin = false;
+  if(isAdminLoading){
+    return <span className="loading loading-bars loading-xl"></span>
+  }
 
-  // Close sidebar on link click (for mobile devices)
   const closeSidebar = () => {
     setIsSidebarOpen(false);
   };
@@ -81,11 +87,29 @@ function Dashboard() {
               </li>
               <li>
                 <NavLink 
+                  to="/dashboard/addItem" 
+                  onClick={closeSidebar}
+                  className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
+                >
+                  <FaUtensils className="text-xl" /> Add Item
+                </NavLink>
+              </li>
+              <li>
+                <NavLink 
                   to="/dashboard/manageItems" 
                   onClick={closeSidebar}
                   className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
                 >
-                  <FaUtensils className="text-xl" /> Manage Items
+                  <FaListUl className="text-xl" /> Manage Items
+                </NavLink>
+              </li>
+              <li>
+                <NavLink 
+                  to="/dashboard/manageBooking" 
+                  onClick={closeSidebar}
+                  className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
+                >
+                  <FaBook className="text-xl" />Manage Booking
                 </NavLink>
               </li>
               <li>
@@ -112,11 +136,40 @@ function Dashboard() {
               </li>
               <li>
                 <NavLink 
+                  to="/dashboard/reservation" 
+                  onClick={closeSidebar}
+                  className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
+                >
+                  <SlCalender className="text-xl" />
+                  Reservation
+                </NavLink>
+              </li>
+              <li>
+                <NavLink 
+                  to="/dashboard/paymentHistory" 
+                  onClick={closeSidebar}
+                  className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
+                >
+                  <FaWallet className="text-xl" />
+                  Payment History
+                </NavLink>
+              </li>
+              <li>
+                <NavLink 
                   to="/dashboard/myCart" 
                   onClick={closeSidebar}
                   className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
                 >
                   <FaShoppingCart className="text-xl" /> My Cart ({cart?.length || 0})
+                </NavLink>
+              </li>
+              <li>
+                <NavLink 
+                  to="/dashboard/addReview" 
+                  onClick={closeSidebar}
+                  className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
+                >
+                  <MdPreview className="text-xl" />Add Review
                 </NavLink>
               </li>
               <li>
