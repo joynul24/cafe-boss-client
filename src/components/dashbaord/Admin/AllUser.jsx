@@ -10,31 +10,30 @@ function AllUser() {
 
   // Handle Role Change to Admin
   const handleMakeAdmin = (user) => {
-    console.log(user)
-    // Swal.fire({
-    //   title: "Are you sure?",
-    //   text: `Do you want to make ${user.name} an Admin?`,
-    //   icon: "warning",
-    //   showCancelButton: true,
-    //   confirmButtonColor: "#D1A054",
-    //   cancelButtonColor: "#d33",
-    //   confirmButtonText: "Yes, Make Admin!",
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
-    //       if (res.data.modifiedCount > 0) {
-    //         refetch();
-    //         Swal.fire({
-    //           position: "top-end",
-    //           icon: "success",
-    //           title: `${user.name} is now an Admin!`,
-    //           showConfirmButton: false,
-    //           timer: 1500,
-    //         });
-    //       }
-    //     });
-    //   }
-    // });
+    Swal.fire({
+      title: "Are you sure?",
+      text: `Do you want to make ${user.name} an Admin?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#D1A054",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Make Admin!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosPublic.patch(`/users/admin/${user._id}`).then((res) => {
+          if (res.data.modifiedCount > 0) {
+            refetch();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: `${user.name} is now an Admin!`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        });
+      }
+    });
   };
   
 
