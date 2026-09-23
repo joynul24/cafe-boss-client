@@ -11,7 +11,6 @@ import ContactUs from "../components/pages/ContactUs/ContactUs";
 import AuthLayout from "../Layout/AuthLayout";
 import Login from "../auth/Login/Login";
 import Register from "../auth/Register/Register";
-import Secret from "../components/pages/Secret/Secret";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
 import Mycart from "../components/dashbaord/User/Mycart";
@@ -26,6 +25,10 @@ import Reservation from "../components/dashbaord/User/Reservation";
 import PaymentHistory from "../components/dashbaord/User/PaymentHistory";
 import AddReview from "../components/dashbaord/User/AddReview";
 import useAdmin from "../hooks/useAdmin";
+import AdminRoute from "./AdminRoute";
+import ErrorPage from "../components/pages/ErrorPage/ErrorPage";
+import UserRoute from "./UserRoute";
+import UpdateItem from "../components/dashbaord/Admin/UpdateItem";
 
 const DashboardRedirect = () => {
     const [isAdmin, isAdminLoading] = useAdmin();
@@ -46,6 +49,7 @@ export const Router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout></MainLayout>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: "/",
@@ -66,10 +70,6 @@ export const Router = createBrowserRouter([
             {
                 path: "shop/:category",
                 element: <OrderShop></OrderShop>
-            },
-            {
-                path: 'secret',
-                element: <PrivateRoute><Secret></Secret></PrivateRoute>
             }
         ]
     },
@@ -81,50 +81,55 @@ export const Router = createBrowserRouter([
             index: true,
             element: <DashboardRedirect></DashboardRedirect>
         },
+        // User releted routes
         {
             path:"/dashboard/userHome",
-            element:<PrivateRoute><UserHome></UserHome></PrivateRoute>
+            element:<PrivateRoute><UserRoute><UserHome></UserHome></UserRoute></PrivateRoute>
         },
         {
-            path:"/dashboard/reservation",
-            element:<PrivateRoute><Reservation></Reservation></PrivateRoute>
+            path:"reservation",
+            element:<PrivateRoute><UserRoute><Reservation></Reservation></UserRoute></PrivateRoute>
         },
         {
-            path:"/dashboard/paymentHistory",
-            element:<PrivateRoute><PaymentHistory></PaymentHistory></PrivateRoute>
+            path:"paymentHistory",
+            element:<PrivateRoute><UserRoute><PaymentHistory></PaymentHistory></UserRoute></PrivateRoute>
         },
         {
-            path: "/dashboard/myCart",
-            element: <PrivateRoute><Mycart></Mycart></PrivateRoute>
+            path: "myCart",
+            element: <PrivateRoute><UserRoute><Mycart></Mycart></UserRoute></PrivateRoute>
         },
         {
-            path: "/dashboard/addReview",
-            element: <PrivateRoute><AddReview></AddReview></PrivateRoute>
+            path: "addReview",
+            element: <PrivateRoute><UserRoute><AddReview></AddReview></UserRoute></PrivateRoute>
         },
         {
-            path: "/dashboard/myBooking",
-            element: <PrivateRoute><MyBooking></MyBooking></PrivateRoute>
+            path: "myBooking",
+            element: <PrivateRoute><UserRoute><MyBooking></MyBooking></UserRoute></PrivateRoute>
         },
         // Admin Reletd Routes
                 {
-            path: "/dashboard/adminHome",
-            element:<PrivateRoute><AdminDashboard></AdminDashboard></PrivateRoute>
+            path: "adminHome",
+            element: <AdminRoute><AdminDashboard></AdminDashboard></AdminRoute>
         },
         {
-            path: "/dashboard/manageItems",
-            element: <PrivateRoute><ManageItem></ManageItem></PrivateRoute>
+            path: "manageItems",
+            element:<AdminRoute><ManageItem></ManageItem></AdminRoute>
         },
         {
-            path:"/dashboard/addItem",
-            element:<PrivateRoute><AddItem></AddItem></PrivateRoute>
+            path: "updateItem/:id",
+            element: <UpdateItem></UpdateItem>
         },
         {
-            path:"/dashboard/manageBooking",
-            element:<PrivateRoute><ManageBookings></ManageBookings></PrivateRoute>
+            path:"addItem",
+            element:<AdminRoute><AddItem></AddItem></AdminRoute>
         },
         {
-            path:"/dashboard/allUsers",
-            element:<PrivateRoute><AllUser></AllUser></PrivateRoute>
+            path:"manageBooking",
+            element:<AdminRoute><ManageBookings></ManageBookings></AdminRoute>
+        },
+        {
+            path:"allUsers",
+            element:<AdminRoute><AllUser></AllUser></AdminRoute>
         }
       ]
     },

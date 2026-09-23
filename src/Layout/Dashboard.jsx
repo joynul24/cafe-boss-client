@@ -22,7 +22,7 @@ import useAdmin from "../hooks/useAdmin";
 function Dashboard() {
   const [cart] = useCartsData();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isAdmin, isAdminLoading] = useAdmin()
+  const [isAdmin, isAdminLoading] = useAdmin();
   // const isAdmin = false;
 
   if(isAdminLoading){

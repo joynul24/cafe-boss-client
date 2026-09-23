@@ -1,12 +1,14 @@
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 import { FaTrashAlt, FaUsers } from "react-icons/fa";
 import useAllUsers from "../../../hooks/useAllUsers";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
+// import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 function AllUser() {
   const [users, , refetch] = useAllUsers();
-  const axiosPublic = useAxiosPublic();
+  // const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   // Handle Role Change to Admin
   const handleMakeAdmin = (user) => {
@@ -20,7 +22,7 @@ function AllUser() {
       confirmButtonText: "Yes, Make Admin!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosPublic.patch(`/users/admin/${user._id}`).then((res) => {
+        axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
           if (res.data.modifiedCount > 0) {
             refetch();
             Swal.fire({
@@ -49,7 +51,7 @@ function AllUser() {
       confirmButtonText: "Yes, delete user!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosPublic.delete(`/users/${user._id}`).then((res) => {
+        axiosSecure.delete(`/users/${user._id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             refetch();
             Swal.fire({
