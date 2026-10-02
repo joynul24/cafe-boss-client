@@ -29,6 +29,7 @@ import AdminRoute from "./AdminRoute";
 import ErrorPage from "../components/pages/ErrorPage/ErrorPage";
 import UserRoute from "./UserRoute";
 import UpdateItem from "../components/dashbaord/Admin/UpdateItem";
+import Payment from "../components/dashbaord/User/Payment";
 
 const DashboardRedirect = () => {
     const [isAdmin, isAdminLoading] = useAdmin();
@@ -93,6 +94,10 @@ export const Router = createBrowserRouter([
         {
             path:"paymentHistory",
             element:<PrivateRoute><UserRoute><PaymentHistory></PaymentHistory></UserRoute></PrivateRoute>
+        },
+        {
+            path: "payment",
+            element: <PrivateRoute><UserRoute><Payment></Payment></UserRoute></PrivateRoute>
         },
         {
             path: "myCart",

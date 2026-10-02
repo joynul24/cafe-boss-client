@@ -6,14 +6,22 @@ import useAuth from '../../../hooks/useAuth';
 
 const UserHome = () => {
   const [cart] = useCartsData();
-  const {user} = useAuth();
+  const { user } = useAuth();
 
   return (
     <div className="w-full p-4 md:p-8 bg-gray-50 min-h-screen">
-      {/* Header Welcome Text */}
-      <h1 className="text-2xl md:text-3xl font-semibold font-serif text-gray-800 mb-6 uppercase tracking-wide">
-        Hi, Welcome Back!
-      </h1>
+      <div className="mb-8 flex flex-col items-start gap-1">
+        <p className="text-xs font-semibold tracking-widest text-[#D1A054] uppercase">
+          Overview & Dashboard
+        </p>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 tracking-tight">
+          Hi, Welcome Back{" "}
+          <span className="inline-block bg-gradient-to-r from-[#D1A054] to-[#b58130] bg-clip-text text-transparent capitalize">
+            {user?.displayName || user?.name || "Guest"}!
+          </span>
+        </h1>
+        <div className="h-1 w-16 bg-[#D1A054] rounded-full mt-2"></div>
+      </div>
 
       {/* Top 3 Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
@@ -47,13 +55,13 @@ const UserHome = () => {
 
       {/* Bottom Profile and Activities Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 shadow-sm rounded-lg overflow-hidden border border-gray-100">
-        
+
         {/* Left Side: User Profile Info */}
         <div className="bg-[#FFEDD5] flex flex-col items-center justify-center py-12 px-6 border-b md:border-b-0 md:border-r border-orange-200">
           <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-[#D1A054] bg-white flex items-center justify-center overflow-hidden mb-4 shadow-inner">
-            <img 
-              src={user?.photoURL} 
-              alt="User Avatar" 
+            <img
+              src={user?.photoURL}
+              alt="User Avatar"
               className="w-full h-full object-cover"
             />
           </div>

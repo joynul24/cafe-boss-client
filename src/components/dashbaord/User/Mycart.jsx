@@ -3,6 +3,7 @@ import useCartsData from "../../../hooks/useCartsData";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 import { FaTrashAlt } from "react-icons/fa";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { Link } from "react-router-dom";
 
 function Mycart() {
   const [cart, refetch] = useCartsData();
@@ -65,12 +66,14 @@ function Mycart() {
           <h2 className="text-xl md:text-2xl font-bold uppercase text-gray-800">
             Total Price: ${totalPrice.toFixed(2)}
           </h2>
-          <button 
+          <Link to={`/dashboard/payment`}>
+                    <button 
             disabled={!cart?.length}
             className="bg-[#D1A054] hover:bg-[#b58742] text-white px-5 py-2 rounded-md font-semibold text-sm uppercase transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Pay
           </button>
+          </Link>
         </div>
 
         {/* Responsive Table Area */}
