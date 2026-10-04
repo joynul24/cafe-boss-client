@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FaCheckCircle, FaTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet-async';
 
 const ManageBookings = () => {
   const axiosSecure = useAxiosSecure();
@@ -103,6 +104,9 @@ const ManageBookings = () => {
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 py-8 sm:py-12">
+      <Helmet>
+        <title>Cafe Boss | Manage Booking</title>
+      </Helmet>
       {/* Header Title */}
       <div className="text-center mb-8">
         <h3 className="text-xl sm:text-2xl font-serif tracking-widest text-gray-400 uppercase">
@@ -164,32 +168,31 @@ const ManageBookings = () => {
                           {isDone ? 'Done' : 'Pending'}
                         </span>
                       </td>
-                     <td className="py-4 px-4 text-center">
-                                                <div className="flex items-center justify-center gap-2">
-                                                    {/* Confirm Button */}
-                                                    <button
-                                                        onClick={() => handleConfirmBooking(booking)}
-                                                        disabled={isDone}
-                                                        title={isDone ? 'Booking Done' : 'Confirm Booking'}
-                                                        className={`p-2 rounded-full transition-transform duration-200 ${
-                                                            isDone
-                                                                ? 'bg-[#007A5A] text-white cursor-not-allowed opacity-90'
-                                                                : 'bg-[#6EE7B7] hover:bg-[#34D399] text-white hover:scale-110'
-                                                        }`}
-                                                    >
-                                                        <FaCheckCircle className="text-lg" />
-                                                    </button>
+                      <td className="py-4 px-4 text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          {/* Confirm Button */}
+                          <button
+                            onClick={() => handleConfirmBooking(booking)}
+                            disabled={isDone}
+                            title={isDone ? 'Booking Done' : 'Confirm Booking'}
+                            className={`p-2 rounded-full transition-transform duration-200 ${isDone
+                                ? 'bg-[#007A5A] text-white cursor-not-allowed opacity-90'
+                                : 'bg-[#6EE7B7] hover:bg-[#34D399] text-white hover:scale-110'
+                              }`}
+                          >
+                            <FaCheckCircle className="text-lg" />
+                          </button>
 
-                                                    {/* Delete Button */}
-                                                    <button
-                                                        onClick={() => handleDeleteBooking(booking._id)}
-                                                        title="Delete Booking"
-                                                        className="p-2.5 rounded-full bg-[#B91C1C] hover:bg-red-800 text-white transition-transform hover:scale-110"
-                                                    >
-                                                        <FaTrashAlt className="text-sm" />
-                                                    </button>
-                                                </div>
-                                            </td>
+                          {/* Delete Button */}
+                          <button
+                            onClick={() => handleDeleteBooking(booking._id)}
+                            title="Delete Booking"
+                            className="p-2.5 rounded-full bg-[#B91C1C] hover:bg-red-800 text-white transition-transform hover:scale-110"
+                          >
+                            <FaTrashAlt className="text-sm" />
+                          </button>
+                        </div>
+                      </td>
                     </tr>
                   );
                 })
@@ -233,27 +236,26 @@ const ManageBookings = () => {
                   </div>
 
                   <div className="pt-2 flex justify-between items-center border-t">
-                                        <span className="text-xs text-gray-500">Actions</span>
-                                        <div className="flex items-center gap-2">
-                                            <button
-                                                onClick={() => handleConfirmBooking(booking)}
-                                                disabled={isDone}
-                                                className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white ${
-                                                    isDone ? 'bg-[#007A5A] opacity-90 cursor-not-allowed' : 'bg-[#34D399]'
-                                                }`}
-                                            >
-                                                <FaCheckCircle />
-                                                <span>{isDone ? 'Done' : 'Confirm'}</span>
-                                            </button>
+                    <span className="text-xs text-gray-500">Actions</span>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => handleConfirmBooking(booking)}
+                        disabled={isDone}
+                        className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white ${isDone ? 'bg-[#007A5A] opacity-90 cursor-not-allowed' : 'bg-[#34D399]'
+                          }`}
+                      >
+                        <FaCheckCircle />
+                        <span>{isDone ? 'Done' : 'Confirm'}</span>
+                      </button>
 
-                                            <button
-                                                onClick={() => handleDeleteBooking(booking._id)}
-                                                className="p-2 rounded-full bg-[#B91C1C] text-white text-xs"
-                                            >
-                                                <FaTrashAlt />
-                                            </button>
-                                        </div>
-                                    </div>
+                      <button
+                        onClick={() => handleDeleteBooking(booking._id)}
+                        className="p-2 rounded-full bg-[#B91C1C] text-white text-xs"
+                      >
+                        <FaTrashAlt />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               );
             })

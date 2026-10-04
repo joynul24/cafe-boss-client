@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet-async';
 
 const PaymentHistory = () => {
   const { user, loading } = useAuth();
@@ -26,6 +27,9 @@ const PaymentHistory = () => {
 
   return (
     <div className="w-11/12 mx-auto my-10">
+      <Helmet>
+        <title>Cafe Boss | Payment History</title>
+      </Helmet>
       {/* Header */}
       <div className="mb-6 text-center sm:text-left">
         <h2 className="text-3xl font-bold text-gray-800">
@@ -76,8 +80,8 @@ const PaymentHistory = () => {
                     </td>
                     <td className="py-3 px-4 text-center">
                       <span className={`px-3 py-1 text-xs font-semibold rounded-full ${payment.status === 'service pending' || payment.status === 'pending'
-                          ? 'bg-amber-100 text-amber-700'
-                          : 'bg-emerald-100 text-emerald-700'
+                        ? 'bg-amber-100 text-amber-700'
+                        : 'bg-emerald-100 text-emerald-700'
                         }`}>
                         {payment.status}
                       </span>
@@ -104,8 +108,8 @@ const PaymentHistory = () => {
                 <div className="flex justify-between items-center border-b pb-2">
                   <span className="text-xs font-bold text-gray-400">#{index + 1}</span>
                   <span className={`px-2.5 py-0.5 text-xs font-semibold rounded-full ${payment.status === 'service pending' || payment.status === 'pending'
-                      ? 'bg-amber-100 text-amber-700'
-                      : 'bg-emerald-100 text-emerald-700'
+                    ? 'bg-amber-100 text-amber-700'
+                    : 'bg-emerald-100 text-emerald-700'
                     }`}>
                     {payment.status}
                   </span>

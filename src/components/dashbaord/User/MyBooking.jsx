@@ -6,6 +6,7 @@ import useAuth from "../../../hooks/useAuth";
 import useCartsData from "../../../hooks/useCartsData";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 function MyBooking() {
   const { user } = useAuth();
@@ -79,7 +80,9 @@ function MyBooking() {
 
   return (
     <div className="w-full max-w-5xl mx-auto px-4 py-8 bg-[#F6F6F6] min-h-screen">
-      
+      <Helmet>
+        <title>Cafe Boss | My Booking</title>
+      </Helmet>
       {/* Section Header */}
       <div className="text-center">
         <SectionTitle title="MY BOOKINGS" subTitle="--- Excellent Ambience ---"></SectionTitle>
@@ -87,7 +90,7 @@ function MyBooking() {
 
       {/* Main Content Box */}
       <div className="bg-white p-4 sm:p-8 rounded-md shadow-sm">
-        
+
         {/* Top Info Bar */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6 text-center sm:text-left">
           <h3 className="text-xl sm:text-2xl font-bold uppercase text-gray-800">
@@ -97,7 +100,7 @@ function MyBooking() {
             Total Price: ${totalPrice.toFixed(2)}
           </h3>
           <Link to={`/dashboard/payment`}>
-            <button 
+            <button
               disabled={bookings.length === 0}
               className="btn bg-[#D1A054] hover:bg-[#b58130] text-white px-6 border-none disabled:bg-gray-300"
             >
@@ -135,11 +138,10 @@ function MyBooking() {
                       <td className="text-gray-600 font-medium">{bookingItem.date || "N/A"}</td>
                       <td className="font-bold">${parseFloat(itemPrice).toFixed(2)}</td>
                       <td>
-                        <span className={`px-3 py-1 rounded-full text-xs font-semibold uppercase ${
-                          isDone 
-                            ? 'bg-emerald-100 text-emerald-700' 
+                        <span className={`px-3 py-1 rounded-full text-xs font-semibold uppercase ${isDone
+                            ? 'bg-emerald-100 text-emerald-700'
                             : 'bg-amber-100 text-amber-700'
-                        }`}>
+                          }`}>
                           {bookingItem.status || 'pending'}
                         </span>
                       </td>
@@ -173,18 +175,17 @@ function MyBooking() {
               const isDone = item.status?.toLowerCase() === 'done';
 
               return (
-                <div 
-                  key={item._id} 
+                <div
+                  key={item._id}
                   className="border border-gray-200 p-4 rounded-lg flex items-center justify-between gap-4 bg-gray-50 shadow-sm"
                 >
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
                       <span className="font-bold text-gray-500">#{index + 1}</span>
-                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase ${
-                        isDone 
-                          ? 'bg-emerald-100 text-emerald-700' 
+                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase ${isDone
+                          ? 'bg-emerald-100 text-emerald-700'
                           : 'bg-amber-100 text-amber-700'
-                      }`}>
+                        }`}>
                         {item.status || 'pending'}
                       </span>
                     </div>

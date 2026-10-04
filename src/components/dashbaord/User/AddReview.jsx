@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { FaPaperPlane, FaStar } from 'react-icons/fa';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import useAuth from '../../../hooks/useAuth';
+import { Helmet } from 'react-helmet-async';
 
 const AddReview = () => {
     const { user } = useAuth();
@@ -54,6 +55,9 @@ const AddReview = () => {
 
     return (
         <div className="w-full max-w-4xl mx-auto px-4 py-8 sm:py-12">
+            <Helmet>
+                <title>Cafe Boss | Add Review</title>
+            </Helmet>
             {/* Header Title */}
             <div className="text-center mb-8">
                 <h3 className="text-xl sm:text-2xl font-serif tracking-widest text-gray-400 uppercase">

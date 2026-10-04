@@ -4,6 +4,7 @@ import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 import { FaTrashAlt } from "react-icons/fa";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 function Mycart() {
   const [cart, refetch] = useCartsData();
@@ -52,12 +53,15 @@ function Mycart() {
 
   return (
     <div className="w-full">
+      <Helmet>
+        <title>Cafe Boss | My Cart</title>
+      </Helmet>
       {/* Page Title Section */}
       <SectionTitle title="WANNA ADD MORE?" subTitle="---My Cart---" />
 
       {/* Main Table Container Card */}
       <div className="bg-white p-4 md:p-10 rounded-lg shadow-sm mt-8 max-w-5xl mx-auto">
-        
+
         {/* Top Summary Header */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8 font-cinzel">
           <h2 className="text-xl md:text-2xl font-bold uppercase text-gray-800">
@@ -67,19 +71,19 @@ function Mycart() {
             Total Price: ${totalPrice.toFixed(2)}
           </h2>
           <Link to={`/dashboard/payment`}>
-                    <button 
-            disabled={!cart?.length}
-            className="bg-[#D1A054] hover:bg-[#b58742] text-white px-5 py-2 rounded-md font-semibold text-sm uppercase transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Pay
-          </button>
+            <button
+              disabled={!cart?.length}
+              className="bg-[#D1A054] hover:bg-[#b58742] text-white px-5 py-2 rounded-md font-semibold text-sm uppercase transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Pay
+            </button>
           </Link>
         </div>
 
         {/* Responsive Table Area */}
         <div className="overflow-x-auto rounded-t-xl">
           <table className="table w-full text-left border-collapse">
-            
+
             {/* Table Header */}
             <thead>
               <tr className="bg-[#D1A054] text-white uppercase text-sm md:text-base font-semibold">
@@ -105,9 +109,9 @@ function Mycart() {
                     <td className="py-4 px-4">
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12 md:w-16 md:h-16 bg-gray-200">
-                          <img 
-                            src={item.image || "https://via.placeholder.com/64"} 
-                            alt={item.name} 
+                          <img
+                            src={item.image || "https://via.placeholder.com/64"}
+                            alt={item.name}
                             className="object-cover w-full h-full"
                           />
                         </div>
@@ -126,7 +130,7 @@ function Mycart() {
 
                     {/* Action Button */}
                     <td className="py-4 px-4 text-center">
-                      <button 
+                      <button
                         onClick={() => handleDelete(item._id)}
                         className="bg-red-700 hover:bg-red-800 text-white p-3 rounded-md transition-colors inline-flex items-center justify-center"
                         aria-label="Delete item"

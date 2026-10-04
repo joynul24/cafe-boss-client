@@ -3,6 +3,7 @@ import React from 'react';
 import { FaWallet, FaStore, FaPhoneAlt, FaShoppingCart, FaStar, FaCalendarAlt, FaCreditCard } from 'react-icons/fa';
 import useCartsData from '../../../hooks/useCartsData';
 import useAuth from '../../../hooks/useAuth';
+import { Helmet } from 'react-helmet-async';
 
 const UserHome = () => {
   const [cart] = useCartsData();
@@ -10,6 +11,9 @@ const UserHome = () => {
 
   return (
     <div className="w-full p-4 md:p-8 bg-gray-50 min-h-screen">
+      <Helmet>
+        <title>Cafe Boss | User Home</title>
+      </Helmet>
       <div className="mb-8 flex flex-col items-start gap-1">
         <p className="text-xs font-semibold tracking-widest text-[#D1A054] uppercase">
           Overview & Dashboard

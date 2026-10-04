@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { Phone, MapPin, Clock, Utensils } from "lucide-react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
+import { Helmet } from "react-helmet-async";
 
 function Reservation() {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -44,7 +45,9 @@ function Reservation() {
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 py-8 bg-white">
-      
+      <Helmet>
+        <title>Cafe Boss | Reservation</title>
+      </Helmet>
       {/* ---------- Section 1: Book A Table Form ---------- */}
       <div className="text-center mb-10">
         <SectionTitle title="Book a Table" subTitle="--- Reservation ---"></SectionTitle>
@@ -119,7 +122,7 @@ function Reservation() {
             <input
               type="email"
               placeholder="Email"
-              {...register("email", { 
+              {...register("email", {
                 required: "Email is required",
                 pattern: { value: /^\S+@\S+$/i, message: "Invalid email address" }
               })}

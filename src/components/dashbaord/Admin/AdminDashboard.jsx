@@ -14,6 +14,7 @@ import {
   Pie
 } from 'recharts';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet-async';
 
 // Custom Triangle Shape for Bar Chart
 const getPath = (x, y, width, height) => {
@@ -78,6 +79,9 @@ function AdminDashboard() {
 
   return (
     <div className="p-4 sm:p-6 md:p-10 bg-[#F6F6F6] min-h-screen">
+      <Helmet>
+        <title>Cafe Boss | Admin Home</title>
+      </Helmet>
       {/* Dynamic Title */}
       <div className="mb-8 flex flex-col items-start gap-1">
         <p className="text-xs font-semibold tracking-widest text-[#D1A054] uppercase">
@@ -94,7 +98,7 @@ function AdminDashboard() {
 
       {/* Dynamic Top Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-10">
-        
+
         {/* Card 1: Revenue */}
         <div className="bg-gradient-to-r from-[#BB34F5] to-[#FCDBFF] text-white p-6 rounded-lg flex items-center justify-center gap-6 shadow-md">
           <Wallet className="w-10 h-10" />

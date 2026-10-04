@@ -4,6 +4,7 @@ import useAllUsers from "../../../hooks/useAllUsers";
 // import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 function AllUser() {
   const [users, , refetch] = useAllUsers();
@@ -37,7 +38,7 @@ function AllUser() {
       }
     });
   };
-  
+
 
   const handleDeleteUser = (user) => {
     // Handle User Delete
@@ -69,6 +70,9 @@ function AllUser() {
 
   return (
     <div className="w-full p-4 md:p-8">
+      <Helmet>
+        <title>Cafe Boss | All Users</title>
+      </Helmet>
       {/* Section Header */}
       <div className="font-cinzel">
         <SectionTitle title="MANAGE ALL USERS" subTitle="---How many??---" />
@@ -76,7 +80,7 @@ function AllUser() {
 
       {/* Main Table Card */}
       <div className="bg-white p-6 md:p-10 rounded-lg shadow-md mt-8 max-w-5xl mx-auto">
-        
+
         {/* Total Users Counter */}
         <div className="mb-6">
           <h2 className="text-xl md:text-2xl font-serif font-bold uppercase text-gray-800">
@@ -87,7 +91,7 @@ function AllUser() {
         {/* Responsive Table Container */}
         <div className="overflow-x-auto rounded-t-xl">
           <table className="table w-full text-left border-collapse">
-            
+
             {/* Table Header */}
             <thead>
               <tr className="bg-[#D1A054] text-white uppercase text-xs md:text-sm font-semibold tracking-wider">
