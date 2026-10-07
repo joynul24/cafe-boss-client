@@ -15,7 +15,7 @@ function Footer() {
             123 ABS Street, Uni 21, Bangladesh
           </p>
           <p className="text-sm text-gray-300">
-            +88 123456789
+            +880 1301249019
           </p>
           <p className="text-sm text-gray-300">
             Mon - Fri: 08:00 - 22:00
@@ -37,14 +37,14 @@ function Footer() {
           {/* Social Icons */}
           <div className="flex items-center justify-center gap-5 pt-2">
             <a 
-              href="#" 
+              href="https://www.facebook.com/devjoynul" 
               aria-label="Facebook" 
               className="hover:text-gray-400 transition-colors duration-200 text-xl"
             >
               <FaFacebookF />
             </a>
             <a 
-              href="#" 
+              href="https://www.instagram.com/devjoynul/" 
               aria-label="Instagram" 
               className="hover:text-gray-400 transition-colors duration-200 text-2xl"
             >

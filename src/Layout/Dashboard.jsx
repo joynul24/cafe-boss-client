@@ -18,12 +18,44 @@ import { useState } from "react";
 import { SlCalender } from "react-icons/sl";
 import { MdPreview } from "react-icons/md";
 import useAdmin from "../hooks/useAdmin";
+import Swal from "sweetalert2";
+import useAuth from "../hooks/useAuth";
 
 function Dashboard() {
   const [cart] = useCartsData();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isAdmin, isAdminLoading] = useAdmin();
-  // const isAdmin = false;
+  const {logOut} = useAuth();
+  
+  // Sign out with Confirmation
+  const handleLogOut = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will be logged out of your session!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#D1A054",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Logout!",
+      cancelButtonText: "Cancel"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logOut()
+          .then(() => {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Logged out successfully!",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          })
+          .catch((error) => {
+            toast.error(error.message);
+          });
+      }
+    });
+  };
 
   if(isAdminLoading){
     return <span className="loading loading-bars loading-xl"></span>
@@ -215,6 +247,14 @@ function Dashboard() {
               <FaEnvelope className="text-xl" /> Contact
             </NavLink>
           </li>
+          {/* Dashbord */}
+          <div>
+           <>
+            <button onClick={handleLogOut} className="btn btn-ghost">
+              LogOut
+            </button>
+          </>
+          </div>
         </ul>
       </div>
 

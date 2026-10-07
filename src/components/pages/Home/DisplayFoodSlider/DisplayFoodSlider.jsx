@@ -28,31 +28,31 @@ function DisplayFoodSlider() {
       >
         <SwiperSlide>
             <img className="w-full" src={img1} alt="Slide 1" />
-            <p className="font-cinzel relative text-center bottom-10">Salads</p>
+            <p className="text-xl md:text-2xl lg:text-3xl font-cinzel relative text-center bottom-10">Salads</p>
         </SwiperSlide>
         <SwiperSlide>
              <img className="w-full" src={img2} alt="Slide 2" />
-             <p className="font-cinzel relative text-center bottom-10 text-white">Pizza</p>
+             <p className="text-xl md:text-2xl lg:text-3xl font-cinzel relative text-center bottom-10 text-white">Pizza</p>
         </SwiperSlide>
         <SwiperSlide>
              <img className="w-full" src={img3} alt="Slide 3" />
-             <p className="font-cinzel relative text-center bottom-10 text-white">Soup</p>
+             <p className="text-xl md:text-2xl lg:text-3xl font-cinzel relative text-center bottom-10 text-white">Soup</p>
         </SwiperSlide>
         <SwiperSlide>
              <img className="w-full" src={img4} alt="Slide 4" />
-             <p className="font-cinzel relative text-center bottom-10 text-white">desserts</p>
+             <p className="text-xl md:text-2xl lg:text-3xl font-cinzel relative text-center bottom-10 text-white">desserts</p>
         </SwiperSlide>
         <SwiperSlide>
              <img className="w-full" src={img5} alt="Slide 5" />
-              <p className="font-cinzel relative text-center bottom-10 text-white">Salads</p>
+              <p className="text-xl md:text-2xl lg:text-3xl font-cinzel relative text-center bottom-10 text-white">Salads</p>
         </SwiperSlide>
         <SwiperSlide>
              <img className="w-full" src={img2} alt="Slide 5" />
-              <p className="font-cinzel relative text-center bottom-10 text-white">Pizza</p>
+              <p className="text-xl md:text-2xl lg:text-3xl font-cinzel relative text-center bottom-10 text-white">Pizza</p>
         </SwiperSlide>
         <SwiperSlide className="">
              <img className="w-full" src={img1} alt="Slide 5" />
-              <p className="font-cinzel relative text-center bottom-10 text-white">Salads</p>
+              <p className="text-xl md:text-2xl lg:text-3xl font-cinzel relative text-center bottom-10 text-white">Salads</p>
         </SwiperSlide>
       </Swiper>
         </div>

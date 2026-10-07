@@ -10,22 +10,37 @@ function Navber() {
   const { user, logOut } = useAuth();
   const [cart] = useCartsData();
 
-  // Sign out
+  // Sign out with Confirmation
   const handleLogOut = () => {
-    logOut()
-      .then(() => {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Logged out successfully!",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      })
-      .catch((error) => {
-        toast.error(error.message)
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will be logged out of your session!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#D1A054",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Logout!",
+      cancelButtonText: "Cancel"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logOut()
+          .then(() => {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Logged out successfully!",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          })
+          .catch((error) => {
+            toast.error(error.message);
+          });
+      }
+    });
   };
+
+
 
   const NavItems = (
     <>
@@ -35,8 +50,8 @@ function Navber() {
       <li><NavLink to={"/shop"}>SHOP
       </NavLink></li>
       <li className="bg-red-400 rounded-full flex items-center justify-center"><NavLink to="/dashboard">
-       <FaShoppingCart className="text-xl"></FaShoppingCart><div className="badge badge-neutral">
-        +{cart.length}
+        <FaShoppingCart className="text-xl"></FaShoppingCart><div className="badge badge-neutral">
+          +{cart.length}
         </div>
       </NavLink></li>
 
