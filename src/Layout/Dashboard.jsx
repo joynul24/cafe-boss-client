@@ -16,7 +16,7 @@ import {
 import useCartsData from "../hooks/useCartsData";
 import { useState } from "react";
 import { SlCalender } from "react-icons/sl";
-import { MdPreview } from "react-icons/md";
+import { MdPayments, MdPreview } from "react-icons/md";
 import useAdmin from "../hooks/useAdmin";
 import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
@@ -151,6 +151,15 @@ function Dashboard() {
                   className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
                 >
                   <FaUsers className="text-xl" /> All Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink 
+                  to="/dashboard/allPaymentHistory" 
+                  onClick={closeSidebar}
+                  className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
+                >
+                  <MdPayments className="text-xl"/>  All Payment
                 </NavLink>
               </li>
             </>
