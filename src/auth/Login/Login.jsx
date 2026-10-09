@@ -7,6 +7,7 @@ import "./Login.css";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 function Login() {
   const [captchaText, setCaptchaText] = useState("");
@@ -120,6 +121,9 @@ function Login() {
   return (
     <div className="bannerBG min-h-screen flex items-center justify-center bg-[#f3f3f3] p-4 sm:p-8">
       <div className="bg-[#f3f3f3] shadow-2xl rounded-lg max-w-5xl w-full p-6 sm:p-12 border border-gray-200">
+              <Link to="/">
+                  <button className="btn btn-sm bg-[#D1A054] hover:bg-[#b58742] text-white mb-5 md:mb-0 border-none"><IoMdArrowRoundBack />Home</button>
+                  </Link>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           
           {/* Left Side Illustration */}

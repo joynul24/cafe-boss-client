@@ -3,12 +3,24 @@ import imgContact from "../../../assets/contact/banner.jpg"
 import { FaClock, FaMapMarkerAlt, FaPaperPlane, FaPhoneAlt } from "react-icons/fa";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 function ContactUs() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Form submission logic here
+
+    // Form Reset (Optional)
+    e.target.reset();
+
+    // Dummy SweetAlert Feedback
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Message successfully submitted!",
+      showConfirmButton: false,
+      timer: 1500
+    });
   };
 
   return (

@@ -1,17 +1,18 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { 
-  FaHome, 
-  FaShoppingCart, 
-  FaUsers, 
-  FaUtensils, 
-  FaList, 
-  FaEnvelope, 
-  FaSearch, 
+import {
+  FaHome,
+  FaShoppingCart,
+  FaUsers,
+  FaUtensils,
+  FaList,
+  FaEnvelope,
+  FaSearch,
   FaBars,
   FaTimes,
   FaListUl,
   FaBook,
   FaWallet,
+  FaCartPlus,
 } from "react-icons/fa";
 import useCartsData from "../hooks/useCartsData";
 import { useState } from "react";
@@ -25,8 +26,8 @@ function Dashboard() {
   const [cart] = useCartsData();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isAdmin, isAdminLoading] = useAdmin();
-  const {logOut} = useAuth();
-  
+  const { logOut } = useAuth();
+
   // Sign out with Confirmation
   const handleLogOut = () => {
     Swal.fire({
@@ -57,7 +58,7 @@ function Dashboard() {
     });
   };
 
-  if(isAdminLoading){
+  if (isAdminLoading) {
     return <span className="loading loading-bars loading-xl"></span>
   }
 
@@ -66,16 +67,16 @@ function Dashboard() {
   };
 
   return (
-   <div className="flex flex-col md:flex-row min-h-screen bg-gray-100 relative">
-      
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-100 relative">
+
       {/* Mobile Top Navigation Bar */}
       <div className="md:hidden bg-[#D1A054] text-black p-4 flex justify-between items-center shadow-md sticky top-0 z-40">
         <div>
           <h1 className="text-xl font-black uppercase">Cafe Boss</h1>
           <p className="text-xs font-bold tracking-widest uppercase">Restaurant</p>
         </div>
-        <button 
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)} 
+        <button
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           className="text-2xl p-2 focus:outline-none"
           aria-label="Toggle Navigation"
         >
@@ -85,17 +86,16 @@ function Dashboard() {
 
       {/* Mobile Backdrop / Overlay */}
       {isSidebarOpen && (
-        <div 
-          onClick={closeSidebar} 
+        <div
+          onClick={closeSidebar}
           className="fixed inset-0 bg-black/50 z-40 md:hidden transition-opacity"
         ></div>
       )}
 
       {/* Navigation Sidebar Component */}
-      <div 
-        className={`fixed md:static top-0 left-0 h-full md:h-auto z-50 w-64 min-h-screen bg-[#D1A054] text-black p-6 font-semibold uppercase transform transition-transform duration-300 ease-in-out ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-        }`}
+      <div
+        className={`fixed md:static top-0 left-0 h-full md:h-auto z-50 w-64 min-h-screen bg-[#D1A054] text-black p-6 font-semibold uppercase transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+          }`}
       >
         {/* Brand Header (Desktop) */}
         <div className="hidden md:block mb-8 tracking-widest text-center">
@@ -109,8 +109,8 @@ function Dashboard() {
             /* Admin Navigation Links */
             <>
               <li>
-                <NavLink 
-                  to="/dashboard/adminHome" 
+                <NavLink
+                  to="/dashboard/adminHome"
                   onClick={closeSidebar}
                   className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
                 >
@@ -118,8 +118,8 @@ function Dashboard() {
                 </NavLink>
               </li>
               <li>
-                <NavLink 
-                  to="/dashboard/addItem" 
+                <NavLink
+                  to="/dashboard/addItem"
                   onClick={closeSidebar}
                   className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
                 >
@@ -127,8 +127,8 @@ function Dashboard() {
                 </NavLink>
               </li>
               <li>
-                <NavLink 
-                  to="/dashboard/manageItems" 
+                <NavLink
+                  to="/dashboard/manageItems"
                   onClick={closeSidebar}
                   className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
                 >
@@ -136,8 +136,8 @@ function Dashboard() {
                 </NavLink>
               </li>
               <li>
-                <NavLink 
-                  to="/dashboard/manageBooking" 
+                <NavLink
+                  to="/dashboard/manageBooking"
                   onClick={closeSidebar}
                   className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
                 >
@@ -145,8 +145,17 @@ function Dashboard() {
                 </NavLink>
               </li>
               <li>
-                <NavLink 
-                  to="/dashboard/allUsers" 
+                <NavLink
+                  to="/dashboard/allCartData"
+                  onClick={closeSidebar}
+                  className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
+                >
+                  <FaCartPlus className="text-xl" />All Carts
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/allUsers"
                   onClick={closeSidebar}
                   className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
                 >
@@ -154,12 +163,12 @@ function Dashboard() {
                 </NavLink>
               </li>
               <li>
-                <NavLink 
-                  to="/dashboard/allPaymentHistory" 
+                <NavLink
+                  to="/dashboard/allPaymentHistory"
                   onClick={closeSidebar}
                   className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
                 >
-                  <MdPayments className="text-xl"/>  All Payment
+                  <MdPayments className="text-xl" />  All Payment
                 </NavLink>
               </li>
             </>
@@ -167,8 +176,8 @@ function Dashboard() {
             /* User Navigation Links */
             <>
               <li>
-                <NavLink 
-                  to="/dashboard/userHome" 
+                <NavLink
+                  to="/dashboard/userHome"
                   onClick={closeSidebar}
                   className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
                 >
@@ -176,8 +185,8 @@ function Dashboard() {
                 </NavLink>
               </li>
               <li>
-                <NavLink 
-                  to="/dashboard/reservation" 
+                <NavLink
+                  to="/dashboard/reservation"
                   onClick={closeSidebar}
                   className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
                 >
@@ -186,8 +195,8 @@ function Dashboard() {
                 </NavLink>
               </li>
               <li>
-                <NavLink 
-                  to="/dashboard/paymentHistory" 
+                <NavLink
+                  to="/dashboard/paymentHistory"
                   onClick={closeSidebar}
                   className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
                 >
@@ -196,8 +205,8 @@ function Dashboard() {
                 </NavLink>
               </li>
               <li>
-                <NavLink 
-                  to="/dashboard/myCart" 
+                <NavLink
+                  to="/dashboard/myCart"
                   onClick={closeSidebar}
                   className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
                 >
@@ -205,8 +214,8 @@ function Dashboard() {
                 </NavLink>
               </li>
               <li>
-                <NavLink 
-                  to="/dashboard/addReview" 
+                <NavLink
+                  to="/dashboard/addReview"
                   onClick={closeSidebar}
                   className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
                 >
@@ -214,8 +223,8 @@ function Dashboard() {
                 </NavLink>
               </li>
               <li>
-                <NavLink 
-                  to="/dashboard/myBooking" 
+                <NavLink
+                  to="/dashboard/myBooking"
                   onClick={closeSidebar}
                   className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
                 >
@@ -230,8 +239,8 @@ function Dashboard() {
 
           {/* Main Site Navigation */}
           <li>
-            <NavLink 
-              to="/" 
+            <NavLink
+              to="/"
               onClick={closeSidebar}
               className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
             >
@@ -239,8 +248,8 @@ function Dashboard() {
             </NavLink>
           </li>
           <li>
-            <NavLink 
-              to="/menu" 
+            <NavLink
+              to="/menu"
               onClick={closeSidebar}
               className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
             >
@@ -248,8 +257,8 @@ function Dashboard() {
             </NavLink>
           </li>
           <li>
-            <NavLink 
-              to="/contact" 
+            <NavLink
+              to="/contact"
               onClick={closeSidebar}
               className="flex items-center gap-3 py-2 px-3 rounded hover:bg-[#b58742]"
             >
@@ -258,11 +267,11 @@ function Dashboard() {
           </li>
           {/* Dashbord */}
           <div>
-           <>
-            <button onClick={handleLogOut} className="btn btn-ghost">
-              LogOut
-            </button>
-          </>
+            <>
+              <button onClick={handleLogOut} className="btn btn-ghost">
+                LogOut
+              </button>
+            </>
           </div>
         </ul>
       </div>

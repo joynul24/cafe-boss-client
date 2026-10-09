@@ -31,6 +31,7 @@ import UserRoute from "./UserRoute";
 import UpdateItem from "../components/dashbaord/Admin/UpdateItem";
 import Payment from "../components/dashbaord/User/Payment";
 import AllPaymentHistory from "../components/dashbaord/Admin/AllPaymentHistory";
+import AllCartData from "../components/dashbaord/Admin/AllCartData";
 
 const DashboardRedirect = () => {
     const [isAdmin, isAdminLoading] = useAdmin();
@@ -132,6 +133,10 @@ export const Router = createBrowserRouter([
         {
             path:"manageBooking",
             element:<AdminRoute><ManageBookings></ManageBookings></AdminRoute>
+        },
+        {
+            path:"allCartData",
+            element:<AdminRoute><AllCartData></AllCartData></AdminRoute>
         },
         {
             path:"allUsers",

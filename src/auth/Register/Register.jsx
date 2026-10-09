@@ -7,6 +7,7 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 function Register() {
   const {
@@ -23,98 +24,101 @@ function Register() {
 
 
   const onSubmit = (data) => {
-  createUser(data.email, data.password)
-    .then(() => {
-      updateUserProfile(data.name, data.photo)
-        .then(() => {
-          // User payload
-          const userInfo = {
-            name: data.name,
-            email: data.email,
-            photoURL: data.photo,
-            role: 'user',
-          };
+    createUser(data.email, data.password)
+      .then(() => {
+        updateUserProfile(data.name, data.photo)
+          .then(() => {
+            // User payload
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+              photoURL: data.photo,
+              role: 'user',
+            };
 
-          // Save user to DB
-          axiosPublic.post('/users', userInfo)
-            .then((res) => {
-              if (res.data.insertedId || res.data.message === 'User already exists') {
-                reset();
-                Swal.fire({
-                  position: "top-end",
-                  icon: "success",
-                  title: "User created successfully!",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-                navigate("/");
-              }
-            })
-            .catch((error) => {
-              console.error("Failed to save user to DB:", error);
+            // Save user to DB
+            axiosPublic.post('/users', userInfo)
+              .then((res) => {
+                if (res.data.insertedId || res.data.message === 'User already exists') {
+                  reset();
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "User created successfully!",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                  navigate("/");
+                }
+              })
+              .catch((error) => {
+                console.error("Failed to save user to DB:", error);
+              });
+          })
+          .catch((error) => {
+            Swal.fire({
+              icon: "error",
+              title: "Profile Update Failed",
+              text: error.message,
             });
-        })
-        .catch((error) => {
-          Swal.fire({
-            icon: "error",
-            title: "Profile Update Failed",
-            text: error.message,
           });
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text: error.message,
         });
-    })
-    .catch((error) => {
-      Swal.fire({
-        icon: "error",
-        title: "Registration Failed",
-        text: error.message,
       });
-    });
-};
+  };
 
 
-const handleGoogleSignIn = () => {
-  googleSignIn()
-    .then((result) => {
-      const loggedUser = result.user;
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const loggedUser = result.user;
 
-      // Google user payload
-      const userInfo = {
-        name: loggedUser.displayName,
-        email: loggedUser.email,
-        photoURL: loggedUser.photoURL,
-        role: 'user',
-      };
+        // Google user payload
+        const userInfo = {
+          name: loggedUser.displayName,
+          email: loggedUser.email,
+          photoURL: loggedUser.photoURL,
+          role: 'user',
+        };
 
-      // Save Google user to DB
-      axiosPublic.post('/users', userInfo)
-        .then(() => {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Logged in with Google successfully!",
-            showConfirmButton: false,
-            timer: 1500,
+        // Save Google user to DB
+        axiosPublic.post('/users', userInfo)
+          .then(() => {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Logged in with Google successfully!",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/");
+          })
+          .catch((error) => {
+            console.error("Failed to save Google user to DB:", error);
           });
-          navigate("/");
-        })
-        .catch((error) => {
-          console.error("Failed to save Google user to DB:", error);
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Google Sign In Failed",
+          text: error.message,
         });
-    })
-    .catch((error) => {
-      Swal.fire({
-        icon: "error",
-        title: "Google Sign In Failed",
-        text: error.message,
       });
-    });
-};
+  };
 
 
   return (
     <div className="bannerBG min-h-screen flex items-center justify-center bg-[#f3f3f3] p-4 sm:p-8">
       {/* Outer Card with Shadow */}
       <div className="bg-[#f3f3f3] shadow-2xl rounded-lg max-w-5xl w-full p-6 sm:p-12 border border-gray-200">
+        <Link to="/">
+          <button className="btn btn-sm bg-[#D1A054] hover:bg-[#b58742] text-white mb-5 md:mb-0 border-none"><IoMdArrowRoundBack />Home</button>
+        </Link>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
 
           {/* Left Side: Form */}

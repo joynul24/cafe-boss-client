@@ -96,6 +96,7 @@ function AllUser() {
             <thead>
               <tr className="bg-[#D1A054] text-white uppercase text-xs md:text-sm font-semibold tracking-wider">
                 <th className="py-4 px-4 text-center">#</th>
+                <th className="py-4 px-4">Image</th>
                 <th className="py-4 px-4">Name</th>
                 <th className="py-4 px-4">Email</th>
                 <th className="py-4 px-4 text-center">Role</th>
@@ -110,6 +111,23 @@ function AllUser() {
                   {/* Serial Number */}
                   <td className="py-4 px-4 font-bold text-center">
                     {index + 1}
+                  </td>
+
+                  {/* Profile Image */}
+                  <td className="py-4 px-4">
+                    <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-200 border border-gray-300 flex items-center justify-center">
+                      {user.photoURL || user.image ? (
+                        <img
+                          src={user.photoURL || user.image}
+                          alt={user.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <span className="font-bold text-gray-600 uppercase text-sm">
+                          {user.name ? user.name.charAt(0) : "U"}
+                        </span>
+                      )}
+                    </div>
                   </td>
 
                   {/* Name */}

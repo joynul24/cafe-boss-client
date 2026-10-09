@@ -54,7 +54,7 @@ function Navber() {
           +{cart.length}
         </div>
       </NavLink></li>
-
+    
       {user ? (
         <>
           <li>

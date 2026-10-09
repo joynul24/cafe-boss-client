@@ -2,8 +2,9 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -88,6 +89,9 @@ function UpdateItem() {
 
   return (
     <div className="w-full max-w-4xl mx-auto p-6 bg-white rounded-md shadow-sm my-6">
+      <Link to="/dashboard/manageItems">
+      <button className="btn btn-sm bg-[#D1A054] hover:bg-[#b58742] text-white mb-5 md:mb-0 border-none"><IoMdArrowRoundBack /></button>
+      </Link>
       <h2 className="text-2xl font-bold text-center mb-6 text-gray-800 uppercase">
         Update Item
       </h2>
