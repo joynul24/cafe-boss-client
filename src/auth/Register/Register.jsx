@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { Helmet } from "react-helmet-async";
 
 function Register() {
   const {
@@ -21,55 +22,60 @@ function Register() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const axiosPublic = useAxiosPublic();
+  // ImageBB Hosting API Configuration
+  const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+  const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 
-  const onSubmit = (data) => {
-    createUser(data.email, data.password)
-      .then(() => {
-        updateUserProfile(data.name, data.photo)
-          .then(() => {
-            // User payload
-            const userInfo = {
-              name: data.name,
-              email: data.email,
-              photoURL: data.photo,
-              role: 'user',
-            };
+  const onSubmit = async (data) => {
+    try {
+      const imageFile = { image: data.image[0] };
 
-            // Save user to DB
-            axiosPublic.post('/users', userInfo)
-              .then((res) => {
-                if (res.data.insertedId || res.data.message === 'User already exists') {
-                  reset();
-                  Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "User created successfully!",
-                    showConfirmButton: false,
-                    timer: 1500,
-                  });
-                  navigate("/");
-                }
-              })
-              .catch((error) => {
-                console.error("Failed to save user to DB:", error);
-              });
-          })
-          .catch((error) => {
-            Swal.fire({
-              icon: "error",
-              title: "Profile Update Failed",
-              text: error.message,
-            });
-          });
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Registration Failed",
-          text: error.message,
-        });
+      const res = await axiosPublic.post(image_hosting_api, imageFile, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
       });
+
+      if (res.data.success) {
+        const photoURL = res.data.data.display_url;
+
+        await createUser(data.email, data.password);
+
+        await updateUserProfile(data.name, photoURL);
+
+        const userInfo = {
+          name: data.name,
+          email: data.email,
+          photoURL: photoURL,
+          role: "user",
+        };
+
+        const dbRes = await axiosPublic.post("/users", userInfo);
+
+        if (
+          dbRes.data.insertedId ||
+          dbRes.data.message === "User already exists"
+        ) {
+          reset();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "User created successfully!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/");
+        }
+      }
+    } catch (error) {
+      console.error("Registration Error:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Registration Failed",
+        text: error?.response?.data?.error?.message || error.message || "Something went wrong!",
+      });
+    }
   };
 
 
@@ -114,6 +120,9 @@ function Register() {
 
   return (
     <div className="bannerBG min-h-screen flex items-center justify-center bg-[#f3f3f3] p-4 sm:p-8">
+      <Helmet>
+        <title>Cafe Boss | Sign Up</title>
+      </Helmet>
       {/* Outer Card with Shadow */}
       <div className="bg-[#f3f3f3] shadow-2xl rounded-lg max-w-5xl w-full p-6 sm:p-12 border border-gray-200">
         <Link to="/">
@@ -149,24 +158,24 @@ function Register() {
                   </span>
                 )}
               </div>
-              {/* Photo URL Field */}
+              {/* Photo File Field */}
               <div className="form-control">
                 <label className="label pl-0 pb-1">
                   <span className="label-text font-semibold text-gray-700">
-                    Photo URL
+                    Profile Photo
                   </span>
                 </label>
                 <input
-                  type="text"
-                  placeholder="Input photo url"
-                  {...register("photo", {
-                    required: "Photo url is required",
+                  type="file"
+                  accept="image/*"
+                  {...register("image", {
+                    required: "Profile photo is required",
                   })}
-                  className="input w-full bg-white border border-gray-300 focus:outline-none focus:border-[#D1A054] rounded-md py-2.5 px-4 text-sm"
+                  className="file-input file-input-bordered w-full bg-white border border-gray-300 focus:outline-none focus:border-[#D1A054] rounded-md text-sm"
                 />
-                {errors.photo && (
+                {errors.image && (
                   <span className="text-xs text-red-500 mt-1">
-                    {errors.photo.message}
+                    {errors.image.message}
                   </span>
                 )}
               </div>
