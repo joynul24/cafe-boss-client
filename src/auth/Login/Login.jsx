@@ -53,28 +53,18 @@ function Login() {
   };
 
 
-  const onSubmit = (data) => {
+  
+const onSubmit = (data) => {
   signIn(data.email, data.password)
-    .then((result) => {
-      const loggedUser = result.user;
-
-      const userInfo = {
-        name: loggedUser.displayName || data.name || "User",
-        email: loggedUser.email,
-        role: "user",
-      };
-
-      axiosPublic.post("/users", userInfo)
-        .then(() => {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "User Logged In Successfully!",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate(from, { replace: true });
-        });
+    .then(() => {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "User Logged In Successfully!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate(from, { replace: true });
     })
     .catch((error) => {
       Swal.fire({
@@ -86,17 +76,17 @@ function Login() {
 };
 
 
-  
-  const handleGoogleSignIn = () => {
+const handleGoogleSignIn = () => {
   googleSignIn()
     .then((result) => {
       const loggedUser = result.user;
-      
+
       const userInfo = {
         name: loggedUser.displayName,
         email: loggedUser.email,
         role: "user",
       };
+
       axiosPublic.post("/users", userInfo)
         .then(() => {
           Swal.fire({
@@ -106,6 +96,9 @@ function Login() {
             showConfirmButton: false,
             timer: 1500,
           });
+          navigate(from, { replace: true });
+        })
+        .catch(() => {
           navigate(from, { replace: true });
         });
     })
@@ -117,6 +110,8 @@ function Login() {
       });
     });
 };
+
+
 
 
   return (
