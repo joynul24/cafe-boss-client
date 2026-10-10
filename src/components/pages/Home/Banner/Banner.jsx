@@ -26,10 +26,10 @@ function BannerVideo() {
 
       {/* Content over video */}
       <div className="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-4">
-        <h1 className="text-4xl md:text-6xl font-bold font-inter uppercase tracking-wide">
+        <h1 className="text-4xl md:text-6xl font-bold font-cinzel uppercase tracking-wide">
           Welcome to Cafe Boss
         </h1>
-        <p className="mt-4 text-lg md:text-xl max-w-xl font-cinzel">
+        <p className="mt-4 text-lg md:text-xl max-w-xl font-inter">
           Experience the best culinary delights with premium taste & ambiance.
         </p>
 

@@ -12,7 +12,7 @@
     font-family: "Inter", sans-serif;
 }
 
-/* ড্যাশবোর্ডের অ্যাক্টিভ আইটেমের জন্য সাদা কালার */
+/* For dashboard color */
 .menu a.active {
   color: #ffffff !important;
   background-color: #b58742; 
