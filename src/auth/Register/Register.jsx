@@ -116,7 +116,7 @@ function Register() {
   return (
     <div className="bannerBG min-h-screen flex items-center justify-center bg-[#f3f3f3] p-4 sm:p-8">
       <Helmet>
-        <title>Cafe Boss | My Booking</title>
+        <title>Cafe Boss | Sign Up</title>
       </Helmet>
       {/* Outer Card with Shadow */}
       <div className="bg-[#f3f3f3] shadow-2xl rounded-lg max-w-5xl w-full p-6 sm:p-12 border border-gray-200">
