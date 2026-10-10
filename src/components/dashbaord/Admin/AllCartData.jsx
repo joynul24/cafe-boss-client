@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 function AllCartData() {
   const axiosSecure = useAxiosSecure();
@@ -63,7 +64,9 @@ function AllCartData() {
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 py-8 sm:py-10 bg-[#F6F6F6] min-h-screen">
-      
+      <Helmet>
+        <title>Cafe Boss | All Carts</title>
+      </Helmet>
       {/* Page Title Header */}
       <div className="text-center mb-8">
         <h3 className="text-sm sm:text-base font-serif tracking-widest text-[#D1A054] uppercase">
@@ -76,7 +79,7 @@ function AllCartData() {
 
       {/* Main Content Card */}
       <div className="bg-white p-4 sm:p-8 rounded-lg shadow-sm border border-gray-100">
-        
+
         {/* Top Info Bar */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6 pb-4 border-b">
           <h2 className="text-lg sm:text-2xl font-bold uppercase text-gray-800">
@@ -108,10 +111,10 @@ function AllCartData() {
                     <td className="font-bold text-gray-600">{index + 1}</td>
                     <td>
                       <div className="w-12 h-12 rounded-md overflow-hidden bg-gray-100 border border-gray-200">
-                        <img 
-                          src={item.image} 
-                          alt={item.name} 
-                          className="w-full h-full object-cover" 
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-full h-full object-cover"
                         />
                       </div>
                     </td>
@@ -144,8 +147,8 @@ function AllCartData() {
         <div className="block md:hidden space-y-4">
           {carts.length > 0 ? (
             carts.map((item, index) => (
-              <div 
-                key={item._id} 
+              <div
+                key={item._id}
                 className="bg-gray-50 border border-gray-200 p-4 rounded-lg shadow-sm flex items-center justify-between gap-3"
               >
                 <div className="flex items-center gap-3">

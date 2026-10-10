@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 function AllPaymentHistory() {
   const axiosSecure = useAxiosSecure();
@@ -63,7 +64,9 @@ function AllPaymentHistory() {
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 py-8 sm:py-10 bg-[#F6F6F6] min-h-screen">
-      
+      <Helmet>
+        <title>Cafe Boss | All Payments</title>
+      </Helmet>
       {/* Page Title Header */}
       <div className="text-center mb-8">
         <h3 className="text-sm sm:text-base font-serif tracking-widest text-[#D1A054] uppercase">
@@ -76,7 +79,7 @@ function AllPaymentHistory() {
 
       {/* Main Container */}
       <div className="bg-white p-4 sm:p-8 rounded-lg shadow-sm border border-gray-100">
-        
+
         {/* Summary Info */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6 pb-4 border-b">
           <h2 className="text-lg sm:text-2xl font-bold uppercase text-gray-800">
@@ -138,8 +141,8 @@ function AllPaymentHistory() {
         <div className="block md:hidden space-y-4">
           {payments.length > 0 ? (
             payments.map((payment, index) => (
-              <div 
-                key={payment._id} 
+              <div
+                key={payment._id}
                 className="bg-gray-50 border border-gray-200 p-4 rounded-lg shadow-sm space-y-3"
               >
                 <div className="flex justify-between items-center border-b pb-2">
