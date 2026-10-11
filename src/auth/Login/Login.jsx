@@ -21,7 +21,7 @@ function Login() {
   const axiosPublic = useAxiosPublic();
 
   const from = location.state?.from?.pathname || "/";
-
+  console.log(from)
   const {
     register,
     handleSubmit,
@@ -64,6 +64,8 @@ const onSubmit = (data) => {
         showConfirmButton: false,
         timer: 1500,
       });
+      
+      generateCaptcha(); 
       navigate(from, { replace: true });
     })
     .catch((error) => {
@@ -75,7 +77,6 @@ const onSubmit = (data) => {
     });
 };
 
-
 const handleGoogleSignIn = () => {
   googleSignIn()
     .then((result) => {
@@ -84,6 +85,7 @@ const handleGoogleSignIn = () => {
       const userInfo = {
         name: loggedUser.displayName,
         email: loggedUser.email,
+        photoURL: loggedUser.photoURL,
         role: "user",
       };
 
@@ -98,8 +100,9 @@ const handleGoogleSignIn = () => {
           });
           navigate(from, { replace: true });
         })
-        .catch(() => {
-          navigate(from, { replace: true });
+        .catch((error) => {
+          console.error("User save error:", error);
+          navigate(from, { replace: true }); // ডাটাবেজে সেভ হলেও যাতে আটকে না যায়
         });
     })
     .catch((error) => {
@@ -110,8 +113,6 @@ const handleGoogleSignIn = () => {
       });
     });
 };
-
-
 
 
   return (

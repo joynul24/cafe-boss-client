@@ -55,30 +55,35 @@ function AuthProvider({ children }) {
     });
   };
 
-  // ৬. OnAuthChange (Observer)
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
         const userInfo = { email: currentUser.email };
         axiosPublic.post("/jwt", userInfo)
-          .then(res => {
+          .then((res) => {
             if (res.data.token) {
-              localStorage.setItem('access-token', res.data.token)
+              localStorage.setItem("access-token", res.data.token);
             }
+            setLoading(false);
           })
+          .catch(() => {
+            setLoading(false);
+          });
+      } else {
+        localStorage.removeItem("access-token");
+        setLoading(false);
       }
-      else {
-        localStorage.removeItem('access-token')
-      }
-      setLoading(false);
     });
 
     return () => {
       return unsubscribe();
     };
-  }, []);
+  }, [axiosPublic]);
 
+
+  
   const authInfo = {
     user,
     loading,
@@ -86,7 +91,7 @@ function AuthProvider({ children }) {
     signIn,
     googleSignIn,
     logOut,
-    updateUserProfile,
+    updateUserProfile
   };
 
   return (
