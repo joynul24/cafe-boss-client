@@ -185,6 +185,7 @@ function Register() {
                 <input
                   type="email"
                   placeholder="Type here"
+                  autoComplete="email"
                   {...register("email", {
                     required: "Email is required",
                     pattern: {
@@ -212,6 +213,7 @@ function Register() {
                 <div className="relative w-full">
                   <input
                     type={showPassword ? "text" : "password"}
+                    autoComplete="new-password"
                     placeholder="Enter your password"
                     {...register("password", {
                       required: "Password is required",

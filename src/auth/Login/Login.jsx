@@ -151,6 +151,7 @@ const handleGoogleSignIn = () => {
                 <input
                   type="email"
                   placeholder="Type here"
+                  autoComplete="email"
                   {...register("email", {
                     required: "Email is required",
                     pattern: {
@@ -178,6 +179,7 @@ const handleGoogleSignIn = () => {
                   <input
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
+                    autoComplete="new-password"
                     {...register("password", {
                       required: "Password is required",
                       minLength: {
